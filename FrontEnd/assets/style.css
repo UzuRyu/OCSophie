@@ -125,6 +125,39 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
+/****Ajouts****/
+
+#filtres {
+	display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 51px;
+}
+
+#filtres label {
+    display: flex;
+    padding: 10px 20px;
+    border: solid 1px #1D6154;
+    color: #1D6154;
+    transition: all 1s;
+    border-radius: 60px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+    font-family: 'Syne';
+}
+
+#filtres input[type="radio"] {
+	display: none;
+}
+
+#filtres input[type="radio"]:checked+label {
+	background: #1D6154;
+    color: white;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;

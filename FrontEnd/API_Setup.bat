@@ -1,0 +1,2 @@
+cd ../BackEnd
+npm start
