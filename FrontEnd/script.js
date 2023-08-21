@@ -11,6 +11,8 @@ async function getAllWorks() {
   }
 }
 
+//** Obsolètes **//
+/*
 async function renderAllWorks() {
   let workJSON = await getAllWorks();
   let div = "";
@@ -25,7 +27,7 @@ async function renderAllWorks() {
 }
 
 async function renderCat(id) {
-  if (id == 0) { await renderAllWorks(); }
+  if (id == 0) { await renderAllWorks();}
   else {
     let workJSON = await getAllWorks();
     let div = "";
@@ -42,27 +44,74 @@ async function renderCat(id) {
   }
 }
 
+*/
+
+async function renderAllWorks(){
+  contenuGallery.innerHTML = '';
+  let workJSON = await getAllWorks();
+  workJSON.forEach((work) => {
+    let newFig = document.createElement("figure")
+    let newFigImg = document.createElement("img");
+    newFigImg.setAttribute('src',work.imageUrl.replace("http://localhost:5678", "../Backend"));
+    newFigImg.setAttribute('alt',work.title);
+    let newFigCap = document.createElement("figcaption", work.title);
+    newFigCap.appendChild(document.createTextNode(work.title));
+    newFig.append(newFigImg);
+    newFig.append(newFigCap);
+    contenuGallery.append(newFig);
+  });
+}
+
+async function renderCat(id) {
+  if (id == 0) { await renderAllWorks(); }
+  else {
+    contenuGallery.innerHTML = '';
+    let workJSON = await getAllWorks();
+    workJSON.forEach((work) => {
+      if (work.categoryId == id) {
+        let newFig = document.createElement("figure")
+        let newFigImg = document.createElement("img");
+        newFigImg.setAttribute('src',work.imageUrl.replace("http://localhost:5678", "../Backend"));
+        newFigImg.setAttribute('alt',work.title);
+        let newFigCap = document.createElement("figcaption", work.title);
+        newFigCap.appendChild(document.createTextNode(work.title));
+        newFig.append(newFigImg);
+        newFig.append(newFigCap);
+        contenuGallery.append(newFig);
+      }
+    });
+  }
+}
+
+
 async function logIn() {
   let saveMain = main
   let div = '<div id="loginDiv">'
             + '<h2> Log In </h2>'
-            + '<form id="logForm">'
+            + '<div id="logForm">'
               + '<label for="ident">E-mail</label>'
               + '<input type="email" id="ident">'
               + '<label for="pass">Mot de passe</label>'
               + '<input type="password" id="pass">'
               + '<input type="submit" value="Se connecter" id="subButton">'
-            + '</form>'
+            + '</div>'
             + '<a href="#">Mot de passe oublie</a>'
           + '</div>'
   main.innerHTML = div;
+  document.getElementById("subButton").addEventListener("hover", auth(document.getElementById("ident").value, document.getElementById("pass").value));
+}
+
+async function auth(mail, pass){
+  console.log("TestAuth");
 }
 
 renderAllWorks();
 
 document.getElementsByTagName("li")[2].addEventListener("click", logIn);
 
-document.getElementById("filtres").addEventListener("click", () => {
+/*document.getElementById("subButton").addEventListener("hover", auth(document.getElementById("ident").value, document.getElementById("pass").value));*/
+
+document.getElementById("filtres").addEventListener("change", () => {
   Array.from(document.getElementsByName("filtre")).forEach((radio) => {
     if (radio.checked) {
       renderCat(radio.value);
