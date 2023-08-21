@@ -1,4 +1,5 @@
 const contenuGallery = document.getElementsByClassName("gallery")[0];
+const main = document.getElementsByTagName("main")[0];
 const linkAPI = "http://localhost:5678/api";
 
 async function getAllWorks() {
@@ -29,13 +30,29 @@ async function renderCat(id) {
   let figure = "";
   let imgURL = "";
   workJSON.forEach((work) => {
-    if(work.categoryId == id) {
-    imgURL = work.imageUrl.replace("http://localhost:5678", "../Backend");
-    figure = '<figure> <img src="' + imgURL + '"alt="' + work.title + '"> <figcaption>' + work.title + "</figcaption> </figure>";
-    div += figure;
+    if (work.categoryId == id) {
+      imgURL = work.imageUrl.replace("http://localhost:5678", "../Backend");
+      figure = '<figure> <img src="' + imgURL + '"alt="' + work.title + '"> <figcaption>' + work.title + "</figcaption> </figure>";
+      div += figure;
     }
   });
   contenuGallery.innerHTML = div;
+}
+
+async function logIn() {
+  let saveMain = main
+  let div = '<div id="loginDiv">'
+          + '<h2> Log In </h2>'
+          + '<form id="logForm">'
+          + '<label for="ident">E-mail</label>'
+          + '<input type="email" id="ident">'
+          + '<label for="pass">Mot de passe</label>'
+          + '<input type="password" id="pass">'
+          + '<input type="submit" value="Se connecter" id="subButton">'
+          + '</form>'
+          + '<a href="#">Mot de passe oublie</a>'
+          + '</div>'
+  main.innerHTML = div;
 }
 
 renderAllWorks();
