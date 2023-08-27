@@ -59,6 +59,19 @@ header {
 	justify-content: space-between;
 	margin: 50px 0
 }
+
+#adminBarre {
+	width: 100vw;
+    display: flex;
+    justify-content: center;
+    margin-top: 0px;
+    position: absolute;
+    padding: 10px;
+    top: 0;
+	left: 0;
+    background: black;
+}
+
 section {
 	margin: 50px 0
 }
@@ -272,4 +285,86 @@ footer nav ul {
 #logForm {
 	display: flex;
 	flex-direction: column;
+}
+
+#modal-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: hsla(0, 0%, 0%, 0.5);
+	width: 100vw;
+	height: 100vh;
+}
+
+#modal-window {
+	position: fixed;
+    top: 10%;
+    background: #FFFFFF;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    width: calc(100vw - 40%);
+    height: fit-content;
+}
+
+#modal-title {
+	margin: 10px;
+	margin-top: 60px;
+	font-family: 'Work Sans';
+	color: black;
+	text-align: center;
+}
+
+#modal-exit {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 24px;
+	height: 24px;
+}
+
+#modal-gallery {
+	display: flex;
+    flex-wrap: wrap;
+    margin: 10px 105px;
+    width: auto;
+	justify-content: space-between;
+}
+
+
+#modal-gallery img {
+    width: 100%;
+    height: auto;
+}
+
+#modal-gallery figure {
+    width: 100%;
+    height: auto;
+}
+
+.figDiv{
+	width: 19%;
+    height: auto;
+	position: relative;
+}
+
+.deleteBtn {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+hr {
+	margin: 10px;
+}
+
+.fa-trash-can {
+	font-size: 16px;
+	margin: 5px;
 }
