@@ -25,7 +25,7 @@ async function renderAllWorks(){
     let newFigCap = document.createElement("figcaption");
     newFigImg.setAttribute('src',work.imageUrl.replace("http://localhost:5678", "../Backend"));
     newFigImg.setAttribute('alt',work.title);
-    newFigCap.appendChild(document.createTextNode(work.id));
+    newFigCap.appendChild(document.createTextNode(work.title));
     newFig.append(newFigImg);
     newFig.append(newFigCap);
     contenuGallery.append(newFig);
@@ -46,7 +46,7 @@ async function renderCat(id) {
         let newFigCap = document.createElement("figcaption");
         newFigImg.setAttribute('src',work.imageUrl.replace("http://localhost:5678", "../Backend"));
         newFigImg.setAttribute('alt',work.title);
-        newFigCap.appendChild(document.createTextNode(work.id));
+        newFigCap.appendChild(document.createTextNode(work.title));
         newFig.append(newFigImg);
         newFig.append(newFigCap);
         contenuGallery.append(newFig);

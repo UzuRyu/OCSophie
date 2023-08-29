@@ -1,8 +1,10 @@
 const linkAPI = "http://localhost:5678/api";
 const logForm = document.getElementById("logForm");
 
+
 logForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+
   let user = {
     email: logForm.ident.value,
     password: logForm.pass.value
@@ -27,11 +29,24 @@ logForm.addEventListener("submit", async (event) => {
   } catch (error) {
     //** Gestion des erreurs 
     if (error.status === 404) {
-      alert("Utilisateur inconnu");
+      logForm.ident.setCustomValidity("Utilisateur inconnu");
+      logForm.ident.reportValidity();
+      setTimeout(resetForm, 500);
     } else if (error.status === 401) {
-      alert("Mot de Passe erroné");
+      logForm.pass.setCustomValidity("Mot de Passe erroné");
+      logForm.pass.reportValidity();
+      setTimeout(resetForm, 500);
     } else {
-      alert("Erreur ", error.status);
+      alert('Unknown Error');
     }
   }
 });
+
+function resetForm() {
+  // Reset Message d'erreur d'identifiant
+  logForm.ident.setCustomValidity("");
+  logForm.ident.reportValidity();
+  // Reset Message d'erreur de mot de passe
+  logForm.pass.setCustomValidity("");
+  logForm.pass.reportValidity();
+}
