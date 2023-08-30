@@ -31,22 +31,20 @@ logForm.addEventListener("submit", async (event) => {
     if (error.status === 404) {
       logForm.ident.setCustomValidity("Utilisateur inconnu");
       logForm.ident.reportValidity();
-      setTimeout(resetForm, 500);
     } else if (error.status === 401) {
       logForm.pass.setCustomValidity("Mot de Passe erroné");
       logForm.pass.reportValidity();
-      setTimeout(resetForm, 500);
     } else {
       alert('Unknown Error');
     }
   }
 });
 
-function resetForm() {
+logForm.addEventListener('change', async () => {
   // Reset Message d'erreur d'identifiant
   logForm.ident.setCustomValidity("");
   logForm.ident.reportValidity();
   // Reset Message d'erreur de mot de passe
   logForm.pass.setCustomValidity("");
   logForm.pass.reportValidity();
-}
+});
