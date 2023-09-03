@@ -1,9 +1,10 @@
 const contenuGallery = document.getElementsByClassName("gallery")[0];
 const main = document.getElementsByTagName("main")[0];
 const linkAPI = "http://localhost:5678/api";
-const user =  JSON.parse(localStorage.getItem("storedUser"));
+const user =  JSON.parse(sessionStorage.getItem("storedUser"));
 const modal = document.getElementById("modal-container");
 const modalGallery = document.getElementById("modal-gallery");
+const addForm = document.getElementById("addForm");
 
 async function getAllWorks() {
   try {
@@ -69,6 +70,32 @@ async function deleteWork(id){
   renderAllWorksModal();
 }
 
+addForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  try {
+    let response = await fetch(linkAPI + '/works', {
+      method: 'POST',
+      headers: {
+        'Accept': '*/*',
+        'Authorization': 'Bearer ' + user.token
+      },
+      body: new FormData(addForm)
+    })
+    if (response.status !== 201) {
+      throw response;
+    } else {
+      responseJSON = await response.json();
+      document.getElementById("modal-AddWork show").id = "modal-AddWork";
+      renderAllWorks();
+      renderAllWorksModal();
+    }
+  } 
+  catch (error) {
+    //** Gestion des erreurs 
+    console.log(error);
+  }
+});
+
 async function adminMode(){
   // Remplace Login par Logout //
   document.getElementsByTagName("li")[2].replaceChild(document.createTextNode("logout"), document.getElementsByTagName("li")[2].firstChild);
@@ -98,12 +125,17 @@ async function adminMode(){
 }
 
 async function editMod(){
-  modal.style.display = null;
+  document.getElementById("modal-container-gallery").id = "modal-container-gallery show";
 }
 
 async function valid(){
   console.log("valid");
 }
+
+document.getElementById("addWorkBtn").addEventListener("click", function() {
+  document.getElementById("modal-container-gallery show").id = "modal-container-gallery";
+  document.getElementById("modal-AddWork").id = "modal-AddWork show";
+})
 
 renderAllWorks();
 
@@ -113,7 +145,7 @@ document.getElementsByTagName("li")[2].addEventListener("click", () => {
     window.location.href = '.' + '/login/login.html';  // Redirection vers la page de Login //
   }
   else{
-    window.localStorage.removeItem("storedUser");  // Déconnexion de l'utilisateur //
+    window.sessionStorage.removeItem("storedUser");  // Déconnexion de l'utilisateur //
     window.location.href = window.location.href;
   }
 });

@@ -73,20 +73,45 @@
 			</form>
 		</section>
 
-		<div id="modal-container" class="modal" style="display: none;">
+		<div id="modal-container-gallery" class="modal">
 			<div id="modal-overlay"></div>
 			<div id="modal-window">
 				<button id="modal-exit"><i class="fa-solid fa-xmark"></i></button>
 				<h1 id="modal-title">Galerie photo</h1>
 				<div id="modal-gallery"></div>
 				<hr>
-				<button id="addWork">Ajouter une photo</button>
-				<button id="deleteAllWorks">Supprimer la galerie</button>
+				<button id="addWorkBtn">Ajouter une photo</button>
+			</div>
+		</div>
+
+		<div id="modal-AddWork" class="modal">
+			<div id="modal-overlay"></div>
+			<div id="addFormDiv">
+				<button id="addmodal-back"><i class="fa-solid fa-arrow-left"></i></button>
+				<button id="addmodal-exit"><i class="fa-solid fa-xmark"></i></button>
+				<form id="addForm">
+					<h1 id="modal-title">Ajout photo</h1>
+					<input id="imgDropBox" type="file" name="image" accept=".png, .jpeg, .jpg">
+					<label for="imgDropBox" id="imgDropBoxLab">
+						<i class="fa-solid fa-image"></i>
+						<span id="imgDropBoxBig"><strong>+ Ajouter photo</strong></span>
+						<span id="imgDropBoxSmall">jpg, png : 4mo max</span>
+					</label>
+					<label for="workTitle">Titre</label>
+					<input type="text" id="workTitle" name="title">
+					<label for="workCat">Catégories</label>
+					<select id="workCat" name="category">
+						<option value="1">Objets</option>
+						<option value="2">Appartements</option>
+						<option value="3">Hôtels et Restauration</option>
+					</select>
+					<hr>
+					<button type ="submit" id="subAddWorkForm">Ajouter une photo</button>
+				</form>
 			</div>
 		</div>
 
 	</main>
-
 	<footer>
 		<nav>
 			<ul>

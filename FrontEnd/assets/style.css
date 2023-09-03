@@ -287,10 +287,32 @@ footer nav ul {
 	flex-direction: column;
 }
 
-#modal-container {
+#modal-container-gallery  {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	visibility: hidden;
+}
+
+#modal-container-gallery\ show {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	visibility: visible;
+}
+
+#modal-AddWork {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	visibility: hidden;
+}
+
+#modal-AddWork\ show {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	visibility: visible;
 }
 
 #modal-overlay {
@@ -310,7 +332,7 @@ footer nav ul {
     flex-wrap: nowrap;
     flex-direction: column;
     width: calc(100vw - 40%);
-    height: fit-content;
+    height: auto;
 }
 
 #modal-title {
@@ -330,28 +352,42 @@ footer nav ul {
 }
 
 #modal-gallery {
-	display: flex;
-    flex-wrap: wrap;
-    margin: 10px 105px;
+    grid-auto-flow: row dense;
+    grid-template-columns: repeat(5, auto);
+    grid-gap: 10px;
+    display: grid;
+    margin: 45px 105px;
+    height: fit-content;
     width: auto;
-	justify-content: space-between;
+	grid-auto-rows: 1fr;
 }
 
 
 #modal-gallery img {
     width: 100%;
-    height: auto;
+    height: 90%;
 }
 
 #modal-gallery figure {
     width: 100%;
-    height: auto;
+    height: 100%;
 }
 
 .figDiv{
-	width: 19%;
+	width: 100%;
     height: auto;
 	position: relative;
+}
+
+#addFormDiv {
+	position: fixed;
+    top: 10%;
+    background: #FFFFFF;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    width: calc(100vw - 40%);
+    height: fit-content;
 }
 
 .deleteBtn {
@@ -367,4 +403,16 @@ hr {
 .fa-trash-can {
 	font-size: 16px;
 	margin: 5px;
+}
+
+#imgDropBox {
+	display: none;
+}
+
+#imgDropBoxLab {
+	padding: 250px 500px;
+}
+
+#modal-window > hr {
+	margin: 10px 105px;
 }

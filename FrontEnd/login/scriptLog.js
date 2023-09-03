@@ -23,7 +23,7 @@ logForm.addEventListener("submit", async (event) => {
     } else {
       responseJSON = await response.json();
       let resJSON = JSON.stringify(responseJSON);
-      localStorage.setItem("storedUser", resJSON);
+      sessionStorage.setItem("storedUser", resJSON);
       window.location.href = '../' + 'index.html';
     }
   } catch (error) {
@@ -40,7 +40,7 @@ logForm.addEventListener("submit", async (event) => {
   }
 });
 
-logForm.addEventListener('change', async () => {
+logForm.addEventListener('change', () => {
   // Reset Message d'erreur d'identifiant
   logForm.ident.setCustomValidity("");
   logForm.ident.reportValidity();
