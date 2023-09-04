@@ -68,6 +68,7 @@ async function deleteWork(id){
   console.log(user.token);
   console.log(response);
   renderAllWorksModal();
+  renderAllWorks();
 }
 
 addForm.addEventListener("submit", async (event) => {
@@ -104,38 +105,53 @@ async function adminMode(){
   // Création des Eléments //
   let barre = document.createElement("div");
   let editButt = document.createElement("button");
-  let confirmButt = document.createElement("button");
   let icon = document.createElement("i");
+  let editButt2 = document.createElement("span");
+  let icon2 = document.createElement("i2");
   // Ajout des Attributs //
   barre.setAttribute('id', "adminBarre");
   icon.setAttribute('class',"fa-solid fa-pen-to-square")
   editButt.setAttribute('id', "editButt");
-  confirmButt.setAttribute('id', "confirmButt");
+  icon2.setAttribute('class',"fa-solid fa-pen-to-square")
+  editButt2.setAttribute('id', "editButt2");
   // Ajout au document //
   editButt.appendChild(icon);
   editButt.appendChild(document.createTextNode("Mode édition"));
-  confirmButt.appendChild(document.createTextNode("publier les changements"));
+  editButt2.appendChild(icon2);
+  editButt2.appendChild(document.createTextNode("éditer"));
   barre.appendChild(editButt);
-  barre.appendChild(confirmButt);
   document.getElementsByTagName("header")[0].prepend(barre);
+  document.getElementsByTagName("h2")[1].append(editButt2);
 
   // Ajout des EventListeners de la Barre d'Administration //
   editButt.addEventListener("click", editMod);
-  confirmButt.addEventListener("click", valid);
+  editButt2.addEventListener("click", editMod);
 }
 
 async function editMod(){
   document.getElementById("modal-container-gallery").id = "modal-container-gallery show";
 }
 
-async function valid(){
-  console.log("valid");
-}
 
 document.getElementById("addWorkBtn").addEventListener("click", function() {
   document.getElementById("modal-container-gallery show").id = "modal-container-gallery";
   document.getElementById("modal-AddWork").id = "modal-AddWork show";
 })
+
+document.getElementById("modal-exit").addEventListener("click", function() {
+  document.getElementById("modal-container-gallery show").id = "modal-container-gallery";
+})
+
+document.getElementById("addmodal-back").addEventListener("click", function() {
+  document.getElementById("modal-container-gallery").id = "modal-container-gallery show";
+  document.getElementById("modal-AddWork show").id = "modal-AddWork";
+})
+
+document.getElementById("addmodal-exit").addEventListener("click", function() {
+  document.getElementById("modal-AddWork show").id = "modal-AddWork";
+})
+
+
 
 renderAllWorks();
 
@@ -184,18 +200,11 @@ async function renderAllWorksModal(){
     newFigDelete.appendChild(iconDelete);
     newFigDiv.appendChild(newFig);
     newFigDiv.appendChild(newFigDelete);
-    newFigCap.appendChild(document.createTextNode("éditer"));
     newFig.append(newFigImg);
     newFig.append(newFigCap);
     modalGallery.append(newFigDiv);
     i++
   });
-  /*
-  let everyDeleteBtn = document.getElementsByClassName("deleteBtn");
-  for(let f = 1; f <= everyDeleteBtn.length; f++){
-    everyDeleteBtn[f].addEventListener("click", deleteWork.bind(this, f));
-  }
-  */
 }
 
 if(user !== null){

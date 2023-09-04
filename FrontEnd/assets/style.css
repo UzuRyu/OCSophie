@@ -204,7 +204,7 @@ li:hover {
 	flex-direction: column;
 }
 
-#contact input {
+#contact input,  #addWorkBtn  {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -220,7 +220,7 @@ li:hover {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
+input[type="submit"], #addWorkBtn {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -230,6 +230,8 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
+
+#addWorkBtn {width: 60%;}
 
 footer {
 	background: #FFFFFF;
@@ -242,7 +244,7 @@ footer nav ul {
 	background: #FFFFFF;
 }
 
-#logForm input[type="email"], #logForm input[type="password"] {
+#logForm input[type="email"], #logForm input[type="password"], #addForm input[type="text"], #workCat {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -325,14 +327,17 @@ footer nav ul {
 }
 
 #modal-window {
-	position: fixed;
+    position: fixed;
     top: 10%;
     background: #FFFFFF;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
-    width: calc(100vw - 40%);
-    height: auto;
+    width: calc(100vw - 50%);
+    height: calc(100vh - 20%);
+    max-height: calc(100vh - 10%);
+    justify-content: space-between;
+    align-items: center;
 }
 
 #modal-title {
@@ -356,16 +361,16 @@ footer nav ul {
     grid-template-columns: repeat(5, auto);
     grid-gap: 10px;
     display: grid;
-    margin: 45px 105px;
-    height: fit-content;
-    width: auto;
-	grid-auto-rows: 1fr;
+    height: 100%;
+    width: 80%;
+    grid-auto-rows: 1fr;
+    overflow: auto;
 }
 
 
 #modal-gallery img {
     width: 100%;
-    height: 90%;
+    height: 100%;
 }
 
 #modal-gallery figure {
@@ -374,13 +379,13 @@ footer nav ul {
 }
 
 .figDiv{
-	width: 100%;
-    height: auto;
+	width: fit-content;
+	height: fit-content;
 	position: relative;
 }
 
 #addFormDiv {
-	position: fixed;
+    position: fixed;
     top: 10%;
     background: #FFFFFF;
     display: flex;
@@ -388,31 +393,110 @@ footer nav ul {
     flex-direction: column;
     width: calc(100vw - 40%);
     height: fit-content;
+    align-items: center;
 }
 
 .deleteBtn {
 	position: absolute;
 	top: 5px;
 	right: 5px;
+	width: 20%;
+	height: 20%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 hr {
 	margin: 10px;
 }
 
-.fa-trash-can {
-	font-size: 16px;
-	margin: 5px;
-}
+/*.fa-trash-can {}*/
 
 #imgDropBox {
 	display: none;
 }
 
 #imgDropBoxLab {
-	padding: 250px 500px;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10px 105px;
 }
 
 #modal-window > hr {
-	margin: 10px 105px;
+	width: 80%;
+}
+
+button#addmodal-back {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+button#addmodal-exit {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+form#addForm {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: fit-content;
+    height: fit-content;
+    background: #FFFFFF;
+}
+
+span#imgDropBoxBig {
+    background: #CBD6DC;
+    border-radius: 50px;
+    border: #CBD6DC solid 1px;
+    width: 134px;
+    height: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+span#imgDropBoxSmall {
+    background: #E8F1F6;
+}
+
+span#imgDropBoxBig > strong {
+    background: inherit;
+    color: #306685;
+}
+
+.fa-image {
+    font-size: 76px;
+    color: #CBD6DC;
+    background: inherit;
+}
+
+button#editButt {
+    background: inherit;
+    color: white;
+    border: none;
+}
+
+.fa-pen-to-square {
+    color: white;
+    background: inherit;
+    padding: 0px 5px;
+}
+
+#editButt2 > .fa-pen-to-square {
+    color: black;
+    background: inherit;
+    padding: 0px 5px;
+}
+
+#editButt2 {
+    cursor: pointer;
+    color: black;
+    font-size: small;
+    margin-left: 10px;
 }
