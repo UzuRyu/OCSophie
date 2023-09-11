@@ -93,20 +93,22 @@
 					<h1 id="modal-title">Ajout photo</h1>
 					<input id="imgDropBox" type="file" name="image" accept=".png, .jpeg, .jpg">
 					<label for="imgDropBox" id="imgDropBoxLab">
-						<i class="fa-solid fa-image"></i>
+						<img id="preview" src="">
+						<i class="fa-solid fa-image" id="postPreview"></i>
 						<span id="imgDropBoxBig"><strong>+ Ajouter photo</strong></span>
 						<span id="imgDropBoxSmall">jpg, png : 4mo max</span>
 					</label>
 					<label for="workTitle">Titre</label>
-					<input type="text" id="workTitle" name="title">
+					<input type="text" id="workTitle" name="title" required>
 					<label for="workCat">Catégories</label>
 					<select id="workCat" name="category">
+						<option value="0"></option>
 						<option value="1">Objets</option>
 						<option value="2">Appartements</option>
 						<option value="3">Hôtels et Restauration</option>
 					</select>
 					<hr>
-					<button type ="submit" id="subAddWorkForm">Ajouter une photo</button>
+					<button type ="submit" id="subAddWorkForm">Valider</button>
 				</form>
 			</div>
 		</div>

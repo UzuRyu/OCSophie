@@ -71,6 +71,28 @@ async function deleteWork(id){
   renderAllWorks();
 }
 
+addForm.imgDropBox.addEventListener("change", (event) => {
+  if (event.target.files.length > 0) {
+    document.getElementById("preview").src = URL.createObjectURL(
+      event.target.files[0]
+    );
+    document.getElementById("postPreview").style.display = 'none';
+    document.getElementById("imgDropBoxBig").style.display = 'none';
+    document.getElementById("imgDropBoxSmall").style.display = 'none';
+  }
+})
+
+addForm.addEventListener("change", () => {
+  if(addForm.workCat.value !== "0" && addForm.workTitle.checkValidity() && addForm.imgDropBox.value !== ''){
+    addForm.subAddWorkForm.removeAttribute('disabled');
+    console.log("yep");
+  }
+  else{
+    addForm.subAddWorkForm.setAttribute('disabled', 'disabled');
+    console.log("nope");
+  }
+})
+
 addForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   try {
@@ -136,6 +158,7 @@ async function editMod(){
 document.getElementById("addWorkBtn").addEventListener("click", function() {
   document.getElementById("modal-container-gallery show").id = "modal-container-gallery";
   document.getElementById("modal-AddWork").id = "modal-AddWork show";
+  addForm.subAddWorkForm.setAttribute('disabled', 'disabled');
 })
 
 document.getElementById("modal-exit").addEventListener("click", function() {
