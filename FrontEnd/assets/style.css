@@ -333,12 +333,13 @@ footer nav ul {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
-    width: calc(100vw - 50%);
-    height: calc(100vh - 20%);
+    width: calc(100vw - 60%);
+    height: calc(100vh - 25%);
     max-height: calc(100vh - 10%);
     justify-content: space-between;
     align-items: center;
-	border-radius: 10px;
+    border-radius: 10px;
+    padding: 20px 70px;
 }
 
 #modal-title {
@@ -365,8 +366,8 @@ footer nav ul {
     grid-template-columns: repeat(5, auto);
     grid-gap: 10px;
     display: grid;
-    height: 100%;
-    width: 80%;
+    height: fit-content;
+    width: fit-content;
     grid-auto-rows: 1fr;
     overflow: auto;
     margin-top: 20px;
@@ -397,10 +398,12 @@ footer nav ul {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
-    width: calc(100vw - 40%);
+    width: calc(100vw - 60%);
     height: fit-content;
+    max-height: 80vh;
     align-items: center;
     border-radius: 10px;
+    padding: 20px 70px;
 }
 
 .deleteBtn {
@@ -424,7 +427,10 @@ hr {
 /*.fa-trash-can {}*/
 
 #imgDropBox {
-	display: none;
+	/*display: none;*/
+	opacity: 0;
+	width: 1px;
+	height: 1px;
 }
 
 #imgDropBoxLab {
@@ -459,10 +465,10 @@ button#addmodal-exit {
     background: inherit;
 }
 
-form#addForm {
+#addForm {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     width: fit-content;
     height: fit-content;
     background: #FFFFFF;
@@ -523,6 +529,7 @@ button#editButt {
 
 #addForm > label {
     background: inherit;
+    text-align: left !important;
 }
 
 button#subAddWorkForm {
@@ -540,9 +547,11 @@ button#subAddWorkForm {
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+/*
 button#subAddWorkForm:disabled {
     background-color: #A7A7A7;
 }
+*/
 
 i.fa-solid.fa-trash-can {
     background: inherit;
@@ -550,8 +559,8 @@ i.fa-solid.fa-trash-can {
 }
 
 #preview {
-	max-width: 80%;
-    max-height: 80%;
+    max-width: 28vw;
+    max-height: 28vh;
     display: block;
 }
 
@@ -559,3 +568,17 @@ i.fa-solid.fa-trash-can {
     width: 80%;
 }
 
+#msgErreur {
+    color: white;
+    text-align: center;
+    background-color: red;
+    padding: 10px 5px;
+}
+
+i.fa-solid.fa-xmark {
+    font-size: 21px;
+}
+
+i.fa-solid.fa-arrow-left {
+    font-size: 21px;
+}

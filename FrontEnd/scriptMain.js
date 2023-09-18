@@ -73,28 +73,58 @@ async function deleteWork(id){
 
 addForm.imgDropBox.addEventListener("change", (event) => {
   if (event.target.files.length > 0) {
-    document.getElementById("preview").src = URL.createObjectURL(
-      event.target.files[0]
-    );
-    document.getElementById("postPreview").style.display = 'none';
-    document.getElementById("imgDropBoxBig").style.display = 'none';
-    document.getElementById("imgDropBoxSmall").style.display = 'none';
+    const fsize = event.target.files.item(0).size;
+    const file = Math.round((fsize / 1024));
+    if (file >= 4096) {
+      alert("Fichier trop lourd. Veuillez choisir un ficher de moins de 4Mo");
+      addForm.imgDropBox.value = '';
+      document.getElementById("preview").src = '';
+      document.getElementById("postPreview").style.display = 'block';
+      document.getElementById("imgDropBoxBig").style.display = 'flex';
+      document.getElementById("imgDropBoxSmall").style.display = 'block';
+    }
+    else {
+      document.getElementById("preview").src = URL.createObjectURL(event.target.files[0]);
+      document.getElementById("postPreview").style.display = 'none';
+      document.getElementById("imgDropBoxBig").style.display = 'none';
+      document.getElementById("imgDropBoxSmall").style.display = 'none';
+    }
   }
 })
 
 addForm.addEventListener("change", () => {
-  if(addForm.workCat.value !== "0" && addForm.workTitle.checkValidity() && addForm.imgDropBox.value !== ''){
-    addForm.subAddWorkForm.removeAttribute('disabled');
+  /* Obsolète
+  addForm.workCat.setCustomValidity("");
+  addForm.imgDropBox.setCustomValidity("");
+  */
+  if(addForm.workCat.value !== "0" && addForm.workTitle.value !== '' && addForm.imgDropBox.value !== ''){
+    addForm.subAddWorkForm.style.setProperty('background-color', '#1D6154');
+    if(document.getElementById("msgErreur") !== null){
+    document.getElementById("msgErreur").remove();
+    }
     console.log("yep");
   }
   else{
-    addForm.subAddWorkForm.setAttribute('disabled', 'disabled');
+    addForm.subAddWorkForm.style.setProperty('background-color', '#A7A7A7');
     console.log("nope");
   }
 })
 
 addForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+  /* Obsolète Message d'erreur Catégorie
+  if(addForm.workCat.value == "0"){
+    addForm.workCat.setCustomValidity("Veuillez choisir une catégorie.");
+    addForm.workCat.reportValidity();
+  }
+  */
+  /* Obsolète Message d'erreur Input Image 
+  if(addForm.imgDropBox.value == ''){
+    addForm.imgDropBox.setCustomValidity("Veuillez insérer une image.");
+    addForm.imgDropBox.reportValidity();
+  }
+  */
+  if(addForm.workCat.value !== "0" && addForm.workTitle.value !=='' && addForm.imgDropBox.value !== ''){
   try {
     let response = await fetch(linkAPI + '/works', {
       method: 'POST',
@@ -111,11 +141,29 @@ addForm.addEventListener("submit", async (event) => {
       document.getElementById("modal-AddWork show").id = "modal-AddWork";
       renderAllWorks();
       renderAllWorksModal();
+
+      // Nettoyage du Formulaire d'Ajout
+      document.getElementById("preview").src = '';
+      document.getElementById("postPreview").style.display = 'block';
+      document.getElementById("imgDropBoxBig").style.display = 'flex';
+      document.getElementById("imgDropBoxSmall").style.display = 'block';
+      addForm.imgDropBox.value = '';
+      addForm.workCat.value = '0';
+      addForm.workTitle.value = '';
     }
   } 
   catch (error) {
-    //** Gestion des erreurs 
+    // Gestion des erreurs 
     console.log(error);
+  }
+}
+  else{
+    if(document.getElementById("msgErreur") == null){
+    let spanError = document.createElement('span');
+    spanError.append(document.createTextNode("Tous les champs sont requis."));
+    spanError.setAttribute("id", "msgErreur");
+    addForm.insertBefore(spanError, subAddWorkForm);
+    }
   }
 });
 
@@ -136,7 +184,7 @@ async function adminMode(){
   editButt.setAttribute('id', "editButt");
   icon2.setAttribute('class',"fa-solid fa-pen-to-square")
   editButt2.setAttribute('id', "editButt2");
-  // Ajout au document //
+  // Ajout au HTML //
   editButt.appendChild(icon);
   editButt.appendChild(document.createTextNode("Mode édition"));
   editButt2.appendChild(icon2);
@@ -150,28 +198,47 @@ async function adminMode(){
   editButt2.addEventListener("click", editMod);
 }
 
+
+// Ouverture de la Gallerie de Modification
 async function editMod(){
   document.getElementById("modal-container-gallery").id = "modal-container-gallery show";
 }
 
-
+// Ouverture de la Modale d'Ajout
 document.getElementById("addWorkBtn").addEventListener("click", function() {
   document.getElementById("modal-container-gallery show").id = "modal-container-gallery";
   document.getElementById("modal-AddWork").id = "modal-AddWork show";
-  addForm.subAddWorkForm.setAttribute('disabled', 'disabled');
+  addForm.subAddWorkForm.style.setProperty('background-color', '#A7A7A7');
 })
 
+// Fermeture de la Gallerie de Modification
 document.getElementById("modal-exit").addEventListener("click", function() {
   document.getElementById("modal-container-gallery show").id = "modal-container-gallery";
 })
 
+// Retour à la Gallerie de Modification à partir de la Modale d'Ajout
 document.getElementById("addmodal-back").addEventListener("click", function() {
   document.getElementById("modal-container-gallery").id = "modal-container-gallery show";
   document.getElementById("modal-AddWork show").id = "modal-AddWork";
+  document.getElementById("preview").src = '';
+  document.getElementById("postPreview").style.display = 'block';
+  document.getElementById("imgDropBoxBig").style.display = 'flex';
+  document.getElementById("imgDropBoxSmall").style.display = 'block';
+  addForm.imgDropBox.value = '';
+  addForm.workCat.value = '0';
+  addForm.workTitle.value = '';
 })
 
+// Fermeture de la Modale d'Ajout
 document.getElementById("addmodal-exit").addEventListener("click", function() {
   document.getElementById("modal-AddWork show").id = "modal-AddWork";
+  document.getElementById("preview").src = '';
+  document.getElementById("postPreview").style.display = 'block';
+  document.getElementById("imgDropBoxBig").style.display = 'flex';
+  document.getElementById("imgDropBoxSmall").style.display = 'block';
+  addForm.imgDropBox.value = '';
+  addForm.workCat.value = '0';
+  addForm.workTitle.value = '';
 })
 
 
