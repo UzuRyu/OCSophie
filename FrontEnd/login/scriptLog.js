@@ -4,7 +4,7 @@ const logForm = document.getElementById("logForm");
 
 logForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-
+  
   let user = {
     email: logForm.ident.value,
     password: logForm.pass.value

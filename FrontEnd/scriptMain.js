@@ -6,6 +6,7 @@ const modal = document.getElementById("modal-container");
 const modalGallery = document.getElementById("modal-gallery");
 const addForm = document.getElementById("addForm");
 
+// Obtention des travaux
 async function getAllWorks() {
   try {
     let res = await fetch(linkAPI + "/works");
@@ -56,6 +57,7 @@ async function renderCat(id) {
   }
 }
 
+// Fonction de suppression des travaux
 async function deleteWork(id){
   const response = await fetch(linkAPI + '/works/' + id, {
     method: "DELETE",
@@ -71,6 +73,7 @@ async function deleteWork(id){
   renderAllWorks();
 }
 
+// Vérification de la Taille de l'Image Uploadée suivi de l'affichage de la Preview
 addForm.imgDropBox.addEventListener("change", (event) => {
   if (event.target.files.length > 0) {
     const fsize = event.target.files.item(0).size;
@@ -156,7 +159,7 @@ addForm.addEventListener("submit", async (event) => {
     // Gestion des erreurs 
     console.log(error);
   }
-}
+  }
   else{
     if(document.getElementById("msgErreur") == null){
     let spanError = document.createElement('span');
@@ -241,8 +244,6 @@ document.getElementById("addmodal-exit").addEventListener("click", function() {
   addForm.workTitle.value = '';
 })
 
-
-
 renderAllWorks();
 
 // Gestion du "bouton" de Login/Logout //
@@ -297,11 +298,8 @@ async function renderAllWorksModal(){
   });
 }
 
+// Si l'utilisateur est connecté
 if(user !== null){
   adminMode();
   renderAllWorksModal()
 }
-
-document.querySelectorAll("deleteBtn").forEach(a => {
-  a.addEventListener("click",console.log(a.value));
-})
